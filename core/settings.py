@@ -230,9 +230,6 @@ CSRF_TRUSTED_ORIGINS = env.csrf_trusted_origins
 CORS_ALLOW_ALL_ORIGINS = env.cors_allow_all_origins
 CORS_ALLOW_CREDENTIALS = env.cors_allow_credentials
 
-# user model
-AUTH_USER_MODEL = 'accounts.User'
-
 
 STORAGES = {
     "default": {
