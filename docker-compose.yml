@@ -11,9 +11,9 @@ services:
     env_file:
       - .env
     command: >
-      sh -c " python manage.py collectstatic  --no-input --clear && python manage.py migrate && gunicorn --reload --access-logfile - --workers 3 --bind 0.0.0.0:8000 core.wsgi:application"
-    #      sh -c " tail -f /dev/null"
-    #      sh -c "python manage.py makemigrations --merge"
+      sh -c " python manage.py collectstatic  --no-input --clear &&
+      python manage.py migrate && 
+      gunicorn --reload --access-logfile - --workers 3 --bind 0.0.0.0:8000 core.wsgi:application"
     networks:
       - default
 
@@ -32,8 +32,8 @@ services:
     command: >
       sh -c "celery -A core beat -l info"
 
-#    networks:
-#      - default
+    networks:
+      - default
 
 networks:
   default:

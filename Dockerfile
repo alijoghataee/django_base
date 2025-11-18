@@ -1,20 +1,20 @@
 FROM python:3.12
+WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV UV_PROJECT_ENVIRONMENT="/usr/local/"
 
-COPY ./requirements.txt requirements.txt
-RUN python -m pip install --upgrade pip
-RUN pip --timeout=1000 install -r requirements.txt
+COPY . .
 
-WORKDIR /app
+RUN pip install uv
 
-COPY . /app
+RUN uv sync --locked --no-dev
 
-#RUN chown -R www-data:www-data /app
+RUN chown -R www-data:www-data /app
 
-#USER www-data
+USER www-data
 
 EXPOSE 8000
 
-CMD gunicorn --bind 0.0.0.0:8000 - core.wsgi:application
+CMD gunicorn --reload --bind 0.0.0.0:8000 --access-logfile - core.wsgi:application

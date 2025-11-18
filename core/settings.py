@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 from typing import List
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings
 
 
 # env settings
@@ -39,9 +39,9 @@ class EnvSettings(BaseSettings):
     s3_media_location: str
     s3_static_location: str
 
-    model_config = SettingsConfigDict(
-        env_file='.env'
-    )
+    model_config = {
+        'env_file': '.env',
+    }
 
 
 env = EnvSettings()
@@ -64,6 +64,7 @@ ALLOWED_HOSTS = env.allowed_hosts
 
 
 BASE_APPS = [
+    'unfold', # it's a third-party app, but must be here to have effect
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -193,8 +194,17 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
+# Swagger Settings
+
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Django Base'
+    'TITLE': 'Django Base',
+    'DESCRIPTION': 'A base project to startup django',
+    "SWAGGER_UI_SETTINGS": {
+        "persistAuthorization": True, # keep the authorization after reload the page
+        "displayRequestDuration": True,
+        "filter": True,
+    },
+    'COMPONENT_SPLIT_REQUEST': True # enable upload file when request body is multipart/form-data
 }
 
 # simplejwt settings
@@ -267,6 +277,3 @@ CACHES = {
         "LOCATION": f"redis://{env.redis_url}/1",
     }
 }
-
-CORS_ALLOW_ALL_ORIGINS = env.cors_allow_all_origins
-CORS_ALLOW_CREDENTIALS = env.cors_allow_credentials

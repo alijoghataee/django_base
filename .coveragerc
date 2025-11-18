@@ -1,0 +1,15 @@
+[run]
+omit =
+    */tests/*
+    */migrations/*
+    */__init__.py
+    core/wsgi.py
+    core/asgi.py
+    manage.py
+    azbankgateways/*
+    conf_test/*
+
+[report]
+exclude_lines =
+    def __str__
+    pragma: no cover

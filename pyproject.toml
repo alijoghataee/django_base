@@ -1,0 +1,35 @@
+[project]
+name = "django-base"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "boto3==1.35.95",
+    "celery==5.4.0",
+    "django==5.1.6",
+    "django-cache-otp>=0.2.2",
+    "django-celery-beat==2.7.0",
+    "django-celery-results==2.5.1",
+    "django-cors-headers==4.7.0",
+    "django-filter==25.1",
+    "django-storages==1.14.6",
+    "django-unfold>=0.69.0",
+    "djangorestframework==3.15.2",
+    "djangorestframework-simplejwt==5.4.0",
+    "drf-spectacular>=0.29.0",
+    "pillow==11.2.1",
+    "psycopg2-binary==2.9.10",
+    "pydantic-settings==2.7.1",
+    "pytest>=9.0.0",
+    "pytest-cov>=7.0.0",
+    "pytest-django>=4.11.1",
+    "redis==5.2.1",
+    "requests==2.32.3",
+    "shapely>=2.1.2",
+]
+
+[dependency-groups]
+dev = [
+    "django-stubs>=5.2.7",
+]
